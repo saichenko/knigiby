@@ -4,7 +4,7 @@ import dj_database_url
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SECRET_KEY = '!6xmo&@!7dzw8p6yxjnj&&1lur%4+fs!r2tuzb#6j(64s@m6)*'
+SECRET_KEY = '$+qzw7=hk#%t1$2$+imy+j@mc&ke#6d=0qz5e$wrapv$o4ezgl'
 ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 ALLOWED_HOSTS = ['*']
