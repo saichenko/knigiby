@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.products.models.products import Product
-from apps.users.models import Profile
+from apps.users.models.profiles import Profile
 
 
 class Cart(models.Model):

@@ -5,11 +5,10 @@ from apps.secondary_objects.models.locational import Country, Address
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     phone_num_code = models.ForeignKey(Country, verbose_name='Код номера тел.',  on_delete=models.CASCADE)
     phone_num = models.CharField('Номер тел.', max_length=12)
-    address = models.ForeignKey(Address, verbose_name='Адрес',  null=True, blank=True, on_delete=models.CASCADE, related_name='address')
-    opt_address = models.ForeignKey(Address, verbose_name='Доп. адрес',  null=True, blank=True, on_delete=models.CASCADE, related_name='opt_adress')
+    address = models.ManyToManyField(Address, verbose_name='Адрес', related_name='profile')
 
     class Meta:
         verbose_name = 'Профиль'

@@ -14,7 +14,7 @@ class Genre(models.Model):
 
 
 class BookSeries(models.Model):
-    name = models.CharField('Название')
+    name = models.CharField('Название', max_length=120)
     description = models.TextField('Описание', null=True, blank=True)
 
     class Meta:

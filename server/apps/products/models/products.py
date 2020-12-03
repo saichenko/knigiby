@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.secondary_objects.models.for_books import Author, Genre, BookSeries, Publisher
-from apps.users.models import Profile
+from apps.users.models.profiles import Profile
 
 
 class Product(models.Model):
