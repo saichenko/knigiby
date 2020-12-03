@@ -42,6 +42,7 @@ class Author(models.Model):
     middle_name = models.CharField('Отчество', max_length=30, null=True, blank=True)
     last_name = models.CharField('Фамилия', max_length=40)
     description = models.TextField('Описание', null=True, blank=True)
+    image = models.ImageField('Фото', default='default_profile.jpg', upload_to='authors')
 
     class Meta:
         verbose_name = 'Автор'
