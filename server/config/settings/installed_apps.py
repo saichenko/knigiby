@@ -17,6 +17,7 @@ LOCAL_APPS = [
     'apps.products',
     'apps.order',
     'apps.cart',
+    'apps.finance',
 ]
 
 INSTALLED_APPS += LOCAL_APPS

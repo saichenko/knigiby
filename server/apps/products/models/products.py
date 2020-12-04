@@ -1,17 +1,17 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
 from apps.secondary_objects.models.for_books import Author, Genre, BookSeries, Publisher
 from apps.users.models.profiles import Profile
 
 
 class Product(models.Model):
-    AGE_RESTRICTION_CHOICES = [
+    AGE_RESTRICTION_CHOICES = (
         (0, '0+'),
         (6, '6+'),
         (12, '12+'),
         (16, '16+'),
         (18, '18+'),
-    ]
+    )
 
     name = models.CharField('Название', max_length=90)
     authors = models.ManyToManyField(Author, verbose_name='Авторы')
@@ -28,7 +28,7 @@ class Product(models.Model):
     weight_gr = models.PositiveSmallIntegerField('Вес, г')
     age_restriction = models.PositiveSmallIntegerField('Возрастное ограничение', choices=AGE_RESTRICTION_CHOICES)
     books_available = models.PositiveSmallIntegerField('Книг в наличии')
-    rating = models.PositiveSmallIntegerField('Рейтинг')
+    rating = models.PositiveSmallIntegerField('Рейтинг', null=True, blank=True)
     created = models.DateTimeField('Создано', auto_now_add=True)
     last_modified = models.DateTimeField('Последнее изменение', auto_now=True)
 
@@ -40,10 +40,10 @@ class Product(models.Model):
         return f'{self.name}'
 
 
-# TODO: add images feature for product comment.
 class ProductComment(models.Model):
     product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE, related_name='product_comment')
     profile = models.ForeignKey(Profile, verbose_name='Профиль', on_delete=models.CASCADE)
+    rate = models.PositiveSmallIntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     text = models.TextField('Текст')
     created = models.DateTimeField('Создано', auto_now_add=True)
     last_modified = models.DateTimeField('Последнее изменение', auto_now=True)

@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.users.models import Profile
+from apps.users.models.profiles import Profile
 
 
 class Tag(models.Model):

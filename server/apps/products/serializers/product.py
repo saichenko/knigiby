@@ -6,7 +6,10 @@ from apps.products.models.products import Product, ProductImage, ProductComment
 class ProductCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductComment
-        fields = ('id', 'product', 'profile', 'text', 'created', 'last_modified')
+        fields = ('id', 'product', 'profile', 'rate', 'text', 'created',)
+        extra_kwargs = {
+            'profile': {'read_only': True},
+        }
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -29,5 +32,5 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'authors', 'main_img', 'image', 'usd_price', 'genres', 'book_series', 'publisher',
             'published', 'pages_number', 'cover', 'format', 'isbn', 'weight_gr', 'age_restriction', 'books_available',
-            'rating', 'product_comment',
+            'rating', 'product_comment'
         )

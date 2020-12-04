@@ -4,7 +4,7 @@ from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import IsAuthenticated
 from url_filter.integrations.drf import DjangoFilterBackend
 
-from apps.api.permissions.is_owner import IsOwner
+from apps.api.permissions.is_address_owner import IsOwner
 from apps.secondary_objects.models.locational import Address, Street
 from apps.secondary_objects.serializers.address import AddressSerializer, StreetSerializer
 

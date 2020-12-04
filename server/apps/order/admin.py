@@ -7,9 +7,7 @@ class OrderCommentInlineModelAdmin(admin.TabularInline):
     model = OrderComment
 
 
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ('cart', 'profile')
     inlines = (OrderCommentInlineModelAdmin, )
-
-
-admin.site.register(Order, OrderAdmin)

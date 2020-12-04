@@ -6,7 +6,8 @@ from apps.users.models.profiles import Profile
 
 class Cart(models.Model):
     profile = models.ForeignKey(Profile, verbose_name='Профиль', on_delete=models.CASCADE)
-    product = models.ManyToManyField(Product, verbose_name='Товары')
+    product = models.ManyToManyField(Product, verbose_name='Товары', blank=True)
+    price_sum = models.PositiveSmallIntegerField('Сумма', default=0, null=True)
     created = models.DateTimeField('Создано', auto_now_add=True)
     last_modified = models.DateTimeField('Последнее изменение', auto_now=True)
 

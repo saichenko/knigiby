@@ -11,12 +11,10 @@ class ProductCommentInline(admin.TabularInline):
     model = ProductComment
 
 
+@admin.site.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    readonly_fields = ('created', 'last_modified',)
+    readonly_fields = ('created', 'last_modified', 'rating')
     inlines = (
         ProductImageInline,
         ProductCommentInline
     )
-
-
-admin.site.register(Product, ProductAdmin)
