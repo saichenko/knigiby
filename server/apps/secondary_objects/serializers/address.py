@@ -13,3 +13,9 @@ class AddressSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'profile': {'read_only': True},
         }
+
+
+class StreetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Street
+        fields = ('id', 'city', 'name')

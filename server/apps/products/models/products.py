@@ -40,6 +40,7 @@ class Product(models.Model):
         return f'{self.name}'
 
 
+# TODO: add images feature for product comment.
 class ProductComment(models.Model):
     product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE, related_name='product_comment')
     profile = models.ForeignKey(Profile, verbose_name='Профиль', on_delete=models.CASCADE)

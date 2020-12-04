@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from apps.users.serializers.users import RegistrationUserSerializer
 from apps.users.models.profiles import Profile
+from apps.cart.models.models import Cart
 
 
 class UserViewSet(mixins.CreateModelMixin,
@@ -30,11 +31,13 @@ class UserViewSet(mixins.CreateModelMixin,
         user.set_password(serializer.validated_data['password'])
         user.save()
 
-        Profile.objects.create(
+        profile = Profile.objects.create(
             user=user,
             phone_num_code=serializer.validated_data['profile']['phone_num_code'],
             phone_num=serializer.validated_data['profile']['phone_num'],
         )
+
+        Cart.objects.create(profile=profile)
 
         token = Token.objects.get_or_create(user=user)[0]
 

@@ -1,13 +1,15 @@
+from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError
+from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
+from url_filter.integrations.drf import DjangoFilterBackend
 
 from apps.api.permissions.is_owner import IsOwner
-from apps.secondary_objects.models.locational import Address
-from apps.secondary_objects.serializers.address import AddressSerializer
+from apps.secondary_objects.models.locational import Address, Street
+from apps.secondary_objects.serializers.address import AddressSerializer, StreetSerializer
 
 
-class AdressViewSet(ModelViewSet):
+class AdressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
     permission_classes = (IsAuthenticated, IsOwner,)
@@ -22,3 +24,11 @@ class AdressViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         return serializer.save(profile=(self.request.user.profile,))
+
+
+class StreetViewSet(viewsets.GenericViewSet,
+                    ListModelMixin):
+    serializer_class = StreetSerializer
+    queryset = Street.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('city',)

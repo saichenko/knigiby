@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.cart.models import Cart
+from apps.cart.models.models import Cart
 from apps.users.models.profiles import Profile
 
 
