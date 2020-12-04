@@ -1,5 +1,6 @@
 from rest_framework import routers
 
+from apps.cart.viewsets.cart import CartApiView
 from apps.products.viewsets.product import ProductViewSet
 from apps.secondary_objects.viewsets.address import AdressViewSet, StreetViewSet
 from apps.secondary_objects.viewsets.for_books import GenreViewSet, BookSeriesViewSet, PublisherViewSet, AuthorViewSet
@@ -12,6 +13,7 @@ router.register('user', UserViewSet, basename='user')
 router.register('address', AdressViewSet, basename='address')
 router.register('street', StreetViewSet, basename='street')
 router.register('product', ProductViewSet, basename='product')
+router.register('cart', CartApiView, basename='cart')
 router.register('genre', GenreViewSet, basename='genre')
 router.register('bookseries', BookSeriesViewSet, basename='bookseries')
 router.register('publisher', PublisherViewSet, basename='publisher')
