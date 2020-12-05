@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from apps.order.models import Order
 from apps.cart.models.models import Cart
+from apps.order.models.models import Order
 from apps.users.models.profiles import Profile
 
 

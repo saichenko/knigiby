@@ -1,12 +1,12 @@
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework import viewsets
 from rest_framework import mixins
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from apps.api.permissions.is_owner import IsOwnerOrReadOnly
-from apps.order.models import OrderComment, Order
-from apps.order.serializers.order import OrderCommentSerializer, OrderSerializer
 from apps.cart.models.models import Cart
 from apps.finance.models.models import DollarValue
+from apps.order.models.models import OrderComment, Order
+from apps.order.serializers.order import OrderCommentSerializer, OrderSerializer
 
 
 class OrderViewSet(mixins.CreateModelMixin,
@@ -16,15 +16,19 @@ class OrderViewSet(mixins.CreateModelMixin,
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
 
+    def filter_queryset(self, queryset):
+        return queryset.filter(profile=self.request.user.profile)
+
     def perform_create(self, serializer):
-        print('!!!!!!!!!!', serializer.validated_data)
         cart = Cart.objects.filter(profile=self.request.user.profile).last()
         usd_price = DollarValue.objects.last().value
-        # price =
         serializer.save(
-            profile=self.request.user.profile,
             cart=cart,
-            byn_price=usd_price * serializer.validated_data[''])
+            profile=self.request.user.profile,
+            receiving_method=serializer.validated_data['receiving_method'],
+            byn_price=usd_price * cart.price_sum,
+        )
+        Cart.objects.create(profile=self.request.user.profile)
 
 
 class OrderCommentViewSet(viewsets.ModelViewSet):

@@ -1,0 +1,1 @@
+from .signals.order_notification import notify_about_order

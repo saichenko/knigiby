@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from apps.cart.serializers.cart import CartSerializer
-from apps.order.models import Order, OrderComment
+from apps.order.models.models import Order, OrderComment
 
 
 class OrderSerializer(ModelSerializer):
